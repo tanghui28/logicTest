@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en" style="height: 100%">
+  <head>
+    <script src="./react.development.js"></script>
+    <script src="./react-dom.development.js"></script>
+    <script src="./babel.min.js"></script>
+  </head>
+  <body style="height: 100%">
+    <div id="root" style="height: 100%"></div>
+    <script type="text/babel">
+      /***
+       *
+       *
+       *   笔试题共4题,根据自身情况选择完成(60分钟以内)
+       *
+       *
+       * */
+
+      /**
+       * 完善 下方 findAllParentDepts 函数 , 返回 某个id 的所有的上层节点的id数组
+       * 如  'U2dPWLOxD-Gh7lqt4mw2Z'   =>   ['3E2X3qZA0db3lonc5h_Xs','WSOslzzUg-OfyPGGVidqi']
+       * */
+      let deptTree = [
+        {
+          id: "WSOslzzUg-OfyPGGVidqi",
+          title: "擎创科技",
+          children: [
+            {
+              id: "3E2X3qZA0db3lonc5h_Xs",
+              title: "产品一部",
+              children: [
+                {
+                  id: "U2dPWLOxD-Gh7lqt4mw2Z",
+                  title: "一部测试组",
+                  children: [
+                    {
+                      id: "OcbCKlsNwa1yV4hV4kl2q",
+                      title: "测试一组",
+                      children: [
+                        {
+                          id: "QjNB3D_iZPA0UuPkeKKFx",
+                          title: "王凯",
+                        },
+                        {
+                          id: "eTcPMpVqHPqWeov1mOP5Q",
+                          title: "王龙",
+                        },
+                      ],
+                    },
+                  ],
+                },
+                {
+                  id: "OU3V1152OtmgWf4_pO8dT",
+                  title: "一部设计部",
+                  children: [
+                    {
+                      id: "BGE-fSUdl7WxYLCV4PwoV",
+                      title: "小李",
+                    },
+                    {
+                      id: "wPd-EoVwD9y96IMXEazne",
+                      title: "小张",
+                    },
+                    {
+                      id: "uimLbEVgrtHgq8B_UoLZj",
+                      title: "小王",
+                    },
+                  ],
+                },
+              ],
+            },
+            {
+              id: "41ngVYWBCRpcrzPaaFyp3",
+              title: "产品二部",
+            },
+          ],
+        },
+      ];
+      /**
+       * @param {Array} data  部门树
+       * @param {string} id   部门树中某个节点id
+       * @returns {Array<string>}     所有的上层节点的id数组
+       */
+      function findAllParentDepts(data, id) {
+        let result = [];
+
+        return result;
+      }
+      console.log(
+        "🚀  findAllParentDepts 测试结果:",
+        findAllParentDepts(deptTree, "OcbCKlsNwa1yV4hV4kl2q")
+      );
+
+      /**
+       *  2、完善下方 TODOList 组件 , 参照图为当前文件夹中 “todolilst组件参照图.png”
+       *  该组件功能为： 添加item (上方输入框输入后,点击submit添加) /  删除item(点击 “ X ” 删除) / 完成item(勾选前方checkbox即为完成)
+       *  左下角显示剩余多少item未完成 , 右下角 点击筛选状态 (所有item / 已完成item)
+       *
+       ******************************************** */
+      const { useState, useEffect } = React;
+      function TodoList() {
+        //your code
+        return (
+          <div className="list">
+            <div style={{ marginTop: 8 }}>
+              <input type="text" placeholder="Add new todo..." />
+              <button>Submit</button>
+            </div>
+          </div>
+        );
+      }
+      function Page() {
+        return <TodoList />;
+      }
+      ReactDOM.render(<Page />, document.getElementById("root"));
+
+      /**
+       * 3、完善deleteVirtualWrapper函数 , 将obj对象中的虚拟包裹层(isVirtualWrapper === true的对象)删除 (将该对象的其余属性放置到上一层对象中, 如果上一层对象任然为虚拟包裹层 , 则继续放置到上一层对象)
+       * ex: {
+       *        name:'tom',
+       *        virtualY:{
+       *                   isVirtualWrapper:true,
+       *                   companyName:'擎创科技',
+       *                   location:'上海'
+       *                },
+       *        virtualA:{
+       *                   isVirtualWrapper:true,
+       *                   virtualB:{
+       *                              isVirtualWrapper:true,
+       *                              address:'孵化园C区'
+       *                            },
+       *                   realProp:{  isVirtualWrapper:false, title:'真实属性' }
+       *                 }
+       *    }
+       *
+       * ==> { name:'tom', companyName:'擎创科技', location:'上海' , address:'孵化园C区' ,  realProp:{ isVirtualWrapper:false, title:'真实属性' }  }
+       *
+       */
+      let obj = {
+        name: "tom",
+        virtualY: {
+          isVirtualWrapper: true,
+          companyName: "擎创科技",
+          location: "上海",
+        },
+        virtualA: {
+          isVirtualWrapper: true,
+          virtualB: { isVirtualWrapper: true, address: "孵化园C区" },
+          realProp: { isVirtualWrapper: false, title: "真实属性" },
+        },
+      };
+      /**
+       * @param {Object} data  需要剔除虚拟层的源数据
+       * @returns {Object}     剔除虚拟层后的数据
+       */
+      function deleteVirtualWrapper(data) {
+        //your code
+        return data;
+      }
+      console.log(
+        "🚀  deleteVirtualWrapper 测试结果:",
+        deleteVirtualWrapper(obj)
+      );
+
+      /**
+       * 4、进入当前文件夹中的“原型面试题” , 查看 “视图.html”  , 理解该原型 , 并写出你认为完成此模块需要后端提供多少个接口并简要描述, 示例如下
+       * ex :  ① getUserInfo接口
+       *            参数: userId (用户id)
+       *            返回结果:  { "userName":"JACK" , "gender":"male" , "age":49 }
+       *       ② getUserList接口
+       *            参数:deptId(部门id) /  size(页大小) / pageNum(页码)
+       *            返回结果:  { "total":66, "pageNum":1,"size":10, "resords":[] }
+       *
+       *     //your answer
+       *
+       *
+       * */
+    </script>
+  </body>
+</html>
